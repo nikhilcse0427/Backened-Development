@@ -5,7 +5,7 @@ import './App.css'
 function App() {
   const [jokes, setJokes] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:4000/api/jokes')
+    axios.get('/api/jokes')
       .then((response) => {
         setJokes(response.data);
       }).catch((error) => {
