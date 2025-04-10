@@ -14,7 +14,7 @@ function App() {
   }, [])
   return (
     <>
-      <div className='border-5 border-blue-800 rounded-sm border-solid h-[calc(100vh-42px)] w-[calc(100vw-20px)] m-2 flex items-center flex-col'>
+      <div className='border-5 border-blue-500 rounded-sm border-solid h-[calc(100vh-42px)] w-[calc(100vw-20px)] m-2 flex items-center flex-col'>
         <p className='text-5xl p-5 text-red-700 font-bold'>Welcome to JokesHub😜</p>
         <div className='w-full'>
           {
