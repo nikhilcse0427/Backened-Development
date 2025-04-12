@@ -1,0 +1,17 @@
+{
+  "name": "backenedconcept",
+  "version": "1.0.0",
+  "description": "production level backened development",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "author": "Nikhil Verma",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "nodemon": "^3.1.9"
+  }
+}
