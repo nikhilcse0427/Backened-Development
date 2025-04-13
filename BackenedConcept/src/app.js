@@ -16,4 +16,13 @@ app.use(express.urlencoded({limit:"16kb"}))
 app.use(express.static("public"))
 app.use(cookieParser())
 
+// app.use('/',(req,res)=>{
+//   res.send("<h1>Welcome to server</h1>")
+// })
+//routes declaration
+import userRouter from './routes/user.route.js'
+app.use('/api/v1/users',userRouter,
+);
+//https:localhost:8000/api/v1/users  login/register
+
 export {app}
