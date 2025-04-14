@@ -1,41 +1,32 @@
-import { v2 as cloudinary } from 'cloudinary'
-import fs from 'fs'
-
+import { v2 as cloudinary } from "cloudinary";
+import fs from "fs";
+import dotenv from "dotenv";
+dotenv.config({
+  path:"./.env"
+});
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_API_SECRET,
-  api_secret: process.env.CLOUDINARY_API_SECRET
-})
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET // Note: Fixed typo (was using API_KEY again)
+});
+
 
 const uploadOnCloudinary = async (localFilePath) => {
   try {
     if (!localFilePath) return null;
-    await cloudinary.uploader.upload(localFilePath, {
-      resource_type: "auto"
-    })
-    //file is successfully uploaded
-    console.log("file is successfully uploaded", response.url)
-    return response.url
+    // Upload the file to Cloudinary
+    const response = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: "auto",
+    });
+    // File has been uploaded successfully
+    console.log("File uploaded to Cloudinary:", response.url);
+    fs.unlinkSync(localFilePath);
+    return response;
   } catch (error) {
-    // If file upload fails, remove the locally saved temporary file
-    fs.unlinkSync(localFilePath)
-    // Return null if upload fails
-    return null
+    console.error("Upload failed:", error);
+    fs.unlinkSync(localFilePath); // Remove the locally saved temporary file
+    return null;
   }
-}
+};
 
-export { uploadOnCloudinary }
-
-
-// When user uploads a file:
-// 1. File comes from user's computer
-// 2. Saved temporarily in ./temp/ folder
-// 3. Uploaded to Cloudinary
-// 4. Deleted from ./temp/ folder
-
-
-// Reasons for temporary storage:
-// 1. Need a place to hold the file before Cloudinary upload
-// 2. Can validate the file before uploading
-// 3. Can process the file if needed
-// 4. Can handle upload errors properly
+export { uploadOnCloudinary};
